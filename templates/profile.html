@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Bites</title>
+    {% load static %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Adding css to the profile page -->
+    <link rel="stylesheet" href="{% static 'static/recipes/css/style.css' %}">
+
+    <!-- Bootstrap for JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+<style>
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1305px;
+}
+/* Navbar Styling */
+.navbar {
+    background-color: #f4f4f9; /* Neutral light gray */
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-brand img.logo-img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    color: #333 !important;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff !important; /* Soft blue for hover effect */
+}
+
+/* Search Bar Styling */
+.form-inline .form-control {
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    width: 200px;
+    padding: 5px 15px;
+    transition: width 0.3s;
+}
+
+.form-inline .form-control:focus {
+    width: 250px;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.form-inline .btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+    border-radius: 20px;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.form-inline .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Logout Button */
+.btn-outline-secondary {
+    color: #333;
+    border-color: #333;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #333;
+    color: white;
+}
+
+        .navbar-dark .navbar-brand {
+    color: #000;
+}
+        .navbar-dark .navbar-brand:hover {
+    color: #000;
+}
+/* Hero Section Styles */
+.hero-section {
+    position: relative;
+    {% load static %}
+    background-image: url("{% static 'images/food_platter.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content .btn {
+    font-size: 1.2rem;
+    padding: 0.5rem 2rem;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.hero-content .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Community Recipes Section Styles */
+.community-recipes {
+    background-color: #f8f9fa;
+}
+
+.community-recipes .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.community-recipes .left-content {
+    padding: 60px;
+}
+
+.community-recipes .left-content h2 {
+    color: #007bff;
+    font-size: 2rem;
+}
+
+.community-recipes .left-content p {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.community-recipes .right-content {
+    background-color: #e9ecef;
+    padding: 60px;
+    border-radius: 10px;
+}
+
+.community-recipes .right-content p {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.community-recipes .btn {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* Services Section Styles */
+.services-section {
+    padding: 60px 0;
+    background-color: #f5f5f5;
+}
+
+.services-section h2 {
+    font-size: 32px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.services-section p {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.services-section .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.services-section .col-md-4 {
+    flex: 0 0 30%; /* Each card occupies 30% of the row to form a 3-column layout */
+    max-width: 30%; /* Limits the width of each card */
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.services-section .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%; /* Ensures all cards are of equal height */
+}
+
+.services-section .card:hover {
+    transform: translateY(-10px);
+}
+
+.services-section .card-img-top {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.services-section .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap; /* Prevents line breaks */
+}
+
+.services-section .card-text {
+    font-size: 16px;
+    color: #666;
+    flex-grow: 1;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .services-section .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Get in Touch Section Styles */
+.get-in-touch {
+    padding: 4rem 0;
+}
+
+.get-in-touch .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.get-in-touch .contact-form {
+    width: 60%;
+}
+
+.get-in-touch .contact-form h2 {
+    font-size: 2.5rem;
+    color: #005d96;
+}
+
+.get-in-touch .contact-form p {
+    margin-bottom: 2rem;
+}
+
+.get-in-touch .contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.get-in-touch .contact-form form label {
+    margin-bottom: 0.5rem;
+}
+
+.get-in-touch .contact-form form input,
+.get-in-touch .contact-form form textarea {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+}
+
+.get-in-touch .contact-form form input[type="checkbox"] {
+    margin-bottom: 1rem;
+    width: auto;
+}
+
+.get-in-touch .contact-form .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+}
+
+.get-in-touch .contact-form .btn:hover {
+    background-color: #5aa0c2;
+}
+
+.get-in-touch .contact-info {
+    width: 35%;
+}
+
+.get-in-touch .contact-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.get-in-touch .contact-info p {
+    margin-bottom: 0.5rem;
+}
+
+/* Footer Section Styles */
+footer {
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.example-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.example-2 .icon-content {
+    margin: 0 10px;
+    position: relative;
+}
+
+.example-2 .icon-content .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.example-2 .icon-content:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -50px;
+}
+
+.example-2 .icon-content a {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #4d4d4d;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.example-2 .icon-content a:hover {
+    box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+}
+
+.example-2 .icon-content a svg {
+    position: relative;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+}
+
+.example-2 .icon-content a:hover {
+    color: white;
+}
+
+.example-2 .icon-content a .filled {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #000;
+    transition: all 0.3s ease-in-out;
+}
+
+.example-2 .icon-content a:hover .filled {
+    height: 100%;
+}
+
+.example-2 .icon-content a[data-social="linkedin"] .filled,
+.example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
+    background-color: #0274b3;
+}
+
+.example-2 .icon-content a[data-social="github"] .filled,
+.example-2 .icon-content a[data-social="github"] ~ .tooltip {
+    background-color: #24262a;
+}
+
+.example-2 .icon-content a[data-social="instagram"] .filled,
+.example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
+    background: linear-gradient(45deg, #405de6, #5b51db, #b33ab4, #c135b4, #e1306c, #fd1f1f);
+}
+
+.example-2 .icon-content a[data-social="youtube"] .filled,
+.example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
+    background-color: #ff0000;
+}
+/* Profile Icon */
+.profile-icon {
+    width: 40px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+/* Recipe Suggestions Section */
+#recipe-suggestions .card-img-top {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+#recipe-suggestions .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+#recipe-suggestions .card:hover {
+    transform: scale(1.03);
+}
+
+#recipe-suggestions .carousel-inner .row {
+    display: flex;
+    justify-content: center;
+}
+.mt-5, .my-5 {
+    margin-top: 3rem !important;
+    margin-bottom: 30px;
+}
+/* Highlight trending section with subtle background */
+#trending-recipes {
+    background-color: #f8f9fa;
+}
+
+#trending-recipes .card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#trending-recipes .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Style the star icon for ratings */
+.text-warning {
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+<!--Trending section-->
+.carousel-item {
+    text-align: center;
+}
+
+.carousel-item .card {
+    margin: auto;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+}
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a href="/" class="navbar-brand">
+            <img src="{% static 'images/logo.png' %}" alt="Food Bites Logo" class="logo-img">
+            <span>Food Bites</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'recipes:user_dashboard' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'recipes:category_list' %}">Categories</a></li>
+                <li class="nav-item"><a class="nav-link" href="#community-recipes">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#get-in-touch">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" data-toggle="dropdown">More</a>
+                    <div class="dropdown-menu" aria-labelledby="moreDropdown">
+                        <a class="nav-link" href="{% url 'recipes:submit_recipe' %}">Submit Recipe</a>
+                        <a class="dropdown-item" href="{% url 'recipes:blog_home' %}">Blog</a> <!-- Blog Link -->
+                        <a class="dropdown-item" href="#">Newsletter</a>
+                    </div>
+                </li>
+            </ul>
+<form class="form-inline my-2 my-lg-0" action="{% url 'recipes:search_results' %}" method="get">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search recipes" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'recipes:profile' %}">
+                        <img src="{% static 'images/user-avatar.png' %}" alt="User Avatar" class="profile-icon">
+                        {{ user.username }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post" class="nav-link">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link p-0" style="color: #333;">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+
+        <h1>Welcome to Your Dashboard, {{ user.username }}!</h1>
+
+        <a href="#services" class="btn btn-primary">View services</a>
+    </div>
+</section>
+
+<!-- Community Recipes Section -->
+<section id="community-recipes" class="community-recipes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 left-content">
+                <h2>Community recipes</h2>
+                <p>Share, explore, and connect</p>
+            </div>
+            <div class="col-md-6 right-content">
+                <p>At Food Bites, we believe there is a better way to meet our clients' needs. We're a company that exists to help you achieve more than you ever thought possible.</p>
+                <p>Understanding all the unique touch-points of each client is essential to our business. We focus on building reliable connections, amazing results, and trusted experiences that are as useful as they are memorable.</p>
+                <p>Let's do great things together. We can't wait to work with you.</p>
+                <button class="btn btn-outline-dark">Get in touch</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Add this slider section below the "Community Recipes Section" -->
+<section id="recipe-suggestions" class="mt-5">
+    <div class="container">
+        <h2 class="text-center">Recommended Recipes</h2>
+        <p class="text-center">Check out these recipes curated just for you!</p>
+
+        <!-- Bootstrap Carousel -->
+        <div id="recipeCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Loop through the recipe suggestions dynamically -->
+                {% for recipe in suggestions %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="card">
+                                {% if recipe.image %}
+                                <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+                                {% else %}
+                                <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No image available">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ recipe.title }}</h5>
+                                    <p class="card-text">{{ recipe.description|truncatewords:15 }}</p>
+                                    <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="btn btn-primary">View Recipe</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Carousel controls -->
+            <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services-section">
+    <div class="container">
+        <h2>Our services</h2>
+        <p>Explore recipes, share experiences</p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{% url 'recipes:service_detail' service_name='recipe-collection' %}">
+                        <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="Recipe collection">
+                        <div class="card-body">
+                            <h5 class="card-title">Recipe collection</h5>
+                            <p class="card-text">Explore a diverse range of recipes from around the world.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{% url 'recipes:service_detail' service_name='user-interaction' %}">
+                        <img src="{% static 'images/bak1.jpg' %}" class="card-img-top" alt="User interaction">
+                        <div class="card-body">
+                            <h5 class="card-title">User interaction</h5>
+                            <p class="card-text">Engage with a vibrant community of food enthusiasts.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{% url 'recipes:service_detail' service_name='flavor-profiles' %}">
+                        <img src="{% static 'images/ink.jpg' %}" class="card-img-top" alt="Flavor profiles">
+                        <div class="card-body">
+                            <h5 class="card-title">Flavor profiles</h5>
+                            <p class="card-text">Discover the essence of various flavor profiles.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{% url 'recipes:service_detail' service_name='recipe-modifications' %}">
+                        <img src="{% static 'images/img.png' %}" class="card-img-top" alt="Recipe modifications">
+                        <div class="card-body">
+                            <h5 class="card-title">Recipe modifications</h5>
+                            <p class="card-text">Personalize recipes to suit your taste preferences.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{% url 'recipes:service_detail' service_name='cooking-experiences' %}">
+                        <img src="{% static 'images/img_7.jpg' %}" class="card-img-top" alt="Cooking experiences">
+                        <div class="card-body">
+                            <h5 class="card-title">Cooking experiences</h5>
+                            <p class="card-text">Share and learn from diverse cooking experiences.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{% url 'recipes:service_detail' service_name='meal-prep-assistance' %}">
+                        <img src="{% static 'images/img_5.jpg' %}" class="card-img-top" alt="Meal prep assistance">
+                        <div class="card-body">
+                            <h5 class="card-title">Meal prep assistance</h5>
+                            <p class="card-text">Simplify meal planning with expert tips and tricks.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="trending-recipes" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">🔥 Trending Recipes</h2>
+        <p class="text-center text-muted">Discover the most loved recipes by our community!</p>
+
+        <!-- Bootstrap Carousel -->
+        <div id="trendingCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for recipe in trending_recipes %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="card shadow-sm">
+                                {% if recipe.image %}
+                                <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}" style="height: 200px; object-fit: cover;">
+                                {% else %}
+                                <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No image available" style="height: 200px; object-fit: cover;">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ recipe.title }}</h5>
+                                    <p class="card-text text-muted">
+                                        {{ recipe.description|truncatewords:20 }}
+                                    </p>
+                                    <p class="mb-2">
+                                        <span class="text-warning">★</span>
+                                        <span class="font-weight-bold">
+                                            {% if recipe.avg_rating %}
+                                                {{ recipe.avg_rating|floatformat:1 }}
+                                            {% else %}
+                                                No Ratings Yet
+                                            {% endif %}
+                                        </span>
+                                    </p>
+                                    <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="btn btn-primary btn-block">View Recipe</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Carousel Controls -->
+            <a class="carousel-control-prev" href="#trendingCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#trendingCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Get in Touch Section -->
+<section id="get-in-touch" class="get-in-touch">
+    <div class="container">
+        <div class="contact-form">
+            <h2>Get in touch</h2>
+            <p>Reach out to us</p>
+            <form>
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+                <label for="email">Email address *</label>
+                <input type="email" id="email" name="email" placeholder="email@website.com" required>
+                <label for="phone">Phone number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="555-555-5555" required>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Your message here..."></textarea>
+                <label>
+                    <input type="checkbox" name="consent" required>
+                    I allow this website to store my submission so they can respond to my inquiry. *
+                </label>
+                <button type="submit" class="btn">SUBMIT</button>
+            </form>
+        </div>
+        <div class="contact-info">
+            <h3>Get in touch</h3>
+            <p><strong>Email:</strong> shrestharia08@gmail.com</p>
+            <p><strong>Location:</strong> Kathmandu, P3 NP</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.731673694691!2d85.312329!3d27.700769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb199ec9e0e1d1%3A0xb2e0b0f0b0f0b0f0!2sKathmandu%20Nepal!5e0!3m2!1sen!2snp!4v1596816582824!5m2!1sen!2snp" width="530" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <h3>Hours</h3>
+            <p>Monday: 9:00am – 10:00pm</p>
+            <p>Tuesday: 9:00am – 10:00pm</p>
+            <p>Wednesday: 9:00am – 10:00pm</p>
+            <p>Thursday: 9:00am – 10:00pm</p>
+            <p>Friday: 9:00am – 10:00pm</p>
+            <p>Saturday: 9:00am – 6:00pm</p>
+            <p>Sunday: 9:00am – 12:00pm</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2024 Food Bites. All rights reserved.</p>
+    <div class="footer-content">
+        <ul class="example-2">
+            <li class="icon-content">
+                <a href="https://linkedin.com/" aria-label="LinkedIn" data-social="linkedin">
+                    <div class="filled"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16" xml:space="preserve">
+                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" fill="currentColor"></path>
+                    </svg>
+                </a>
+                <div class="tooltip">LinkedIn</div>
+            </li>
+            <li class="icon-content">
+                <a href="https://www.github.com/" aria-label="GitHub" data-social="github">
+                    <div class="filled"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16" xml:space="preserve">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" fill="currentColor"></path>
+                    </svg>
+                </a>
+                <div class="tooltip">GitHub</div>
+            </li>
+            <li class="icon-content">
+                <a href="https://www.instagram.com/" aria-label="Instagram" data-social="instagram">
+                    <div class="filled"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16" xml:space="preserve">
+                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" fill="currentColor"></path>
+                    </svg>
+                </a>
+                <div class="tooltip">Instagram</div>
+            </li>
+            <li class="icon-content">
+                <a href="https://youtube.com/" aria-label="Youtube" data-social="youtube">
+                    <div class="filled"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16" xml:space="preserve">
+                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z" fill="currentColor"></path>
+                    </svg>
+                </a>
+                <div class="tooltip">Youtube</div>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+{% load static %}
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="{% static 'js/main.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

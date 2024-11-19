@@ -1,0 +1,78 @@
+{% extends "base.html" %}  <!-- Inherit from the base template 'base.html' -->
+
+{% load static %}  <!-- Load static files for use in the template -->
+
+{% block content %}  <!-- Start the content block for this template -->
+
+<div class="container mt-5">  <!-- Create a container with a top margin for spacing -->
+
+    <h2 class="mb-4 text-center">{{ category.name }}</h2>  <!-- Display the category name as a heading, centered with bottom margin -->
+
+    <div class="mb-4 text-center">  <!-- Create a div for filtering options, centered with bottom margin -->
+
+        <h5>Filter by Tags:</h5>  <!-- Heading for the filter section -->
+
+        {% for tag in tags %}  <!-- Loop through each tag in the tags list -->
+            <a href="?tag={{ tag }}" class="btn btn-outline-secondary btn-sm me-1">{{ tag|title }}</a>  <!-- Create a button for each tag to filter recipes -->
+        {% endfor %}  <!-- End of the tag loop -->
+
+    </div>  <!-- End of the filter section -->
+
+    <div class="row">  <!-- Start a new row for displaying recipes -->
+
+        {% for recipe in recipes %}  <!-- Loop through each recipe in the recipes list -->
+
+        <div class="col-md-4 mb-4 d-flex align-items-stretch">  <!-- Create a column for each recipe, with bottom margin and flex alignment -->
+
+            <div class="card shadow-sm">  <!-- Create a card with a shadow effect for the recipe -->
+
+                {% if recipe.image %}  <!-- Check if the recipe has an image -->
+                    <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}" style="object-fit: cover; height: 200px;">  <!-- Display the recipe image with specific styling -->
+                {% else %}  <!-- If no image is available -->
+                    <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No image available" style="object-fit: cover; height: 200px;">  <!-- Display a placeholder image -->
+                {% endif %}  <!-- End of the image check -->
+
+                <div class="card-body d-flex flex-column">  <!-- Start the card body with flex column layout -->
+
+                    <h5 class="card-title">{{ recipe.title }}</h5>  <!-- Display the recipe title -->
+                    <p class="card-text text-muted">{{ recipe.description|truncatewords:15 }}</p>  <!-- Display a truncated description of the recipe (15 words) -->
+
+                    <div class="mt-auto">  <!-- Create a div that pushes content to the bottom -->
+                        <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="btn btn-primary w-100">View Recipe</a>  <!-- Button to view the full recipe details -->
+                    </div>  <!-- End of the bottom div -->
+
+                </div>  <!-- End of the card body -->
+
+            </div>  <!-- End of the card -->
+
+        </div>  <!-- End of the recipe column -->
+
+        {% endfor %}  <!-- End of the recipe loop -->
+
+    </div>  <!-- End of the row -->
+
+    <div class="pagination text-center">  <!-- Create a pagination section, centered -->
+
+        <span class="step-links">  <!-- Start a span for pagination links -->
+
+            {% if recipes.has_previous %}  <!-- Check if there is a previous page -->
+                <a href="?page=1" class="btn btn-outline-secondary btn-sm">&laquo; First</a>  <!-- Button to go to the first page -->
+                <a href="?page={{ recipes.previous_page_number }}" class="btn btn-outline-secondary btn-sm">Previous</a>  <!-- Button to go to the previous page -->
+            {% endif %}  <!-- End of previous page check -->
+
+            <span class="current btn btn-light btn-sm disabled">  <!-- Display the current page information -->
+                Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}.  <!-- Show current page number and total pages -->
+            </span>  <!-- End of current page info -->
+
+            {% if recipes.has_next %}  <!-- Check if there is a next page -->
+                <a href="?page={{ recipes.next_page_number }}" class="btn btn-outline-secondary btn-sm">Next</a>  <!-- Button to go to the next page -->
+                <a href="?page={{ recipes.paginator.num_pages }}" class="btn btn-outline-secondary btn-sm">Last &raquo;</a>  <!-- Button to go to the last page -->
+            {% endif %}  <!-- End of next page check -->
+
+        </span>  <!-- End of pagination links -->
+
+    </div>  <!-- End of pagination section -->
+
+</div>  <!-- End of the container -->
+
+{% endblock %}  <!-- End of the content block -->

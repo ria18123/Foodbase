@@ -1,0 +1,192 @@
+/* Ensure the navbar is displayed as a flex container */
+.navbar {
+    display: flex;  /* Use flexbox layout for the navbar */
+    justify-content: center; /* Center the items horizontally */
+    align-items: center;     /* Center the items vertically if needed */
+}
+
+/* Ensure the navbar items are displayed inline and centered */
+.navbar-nav {
+    display: flex;  /* Use flexbox layout for the navbar items */
+    justify-content: center; /* Center the items horizontally */
+    flex-grow: 1;  /* Allow the navbar items to grow and fill available space */
+}
+
+/* Additional styling for nav items if necessary */
+.nav-item {
+    margin: 0 15px; /* Add some spacing between the nav items */
+}
+
+/* style.css */
+
+/* Reset default margin and padding */
+body, h1, h2, p, form {
+    margin: 0;  /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* Set a background color */
+body {
+    background-color: #f2f2f2;  /* Light gray background color */
+    font-family: Arial, sans-serif;  /* Set the font family */
+}
+
+/* Header styling */
+header {
+    background-color: #222;  /* Dark background color for the header */
+    color: #fff;  /* White text color */
+    text-align: center;  /* Center the text */
+    padding: 10px 0;  /* Vertical padding */
+}
+
+header h1 {
+    font-weight: 600;  /* Set font weight for the header */
+    font-size: 40px;  /* Set font size for the header */
+}
+
+/* Form container */
+form {
+    max-width: 400px;  /* Set maximum width for the form */
+    margin: 20px auto;  /* Center the form horizontally with margin */
+    background-color: #fff;  /* White background for the form */
+    padding: 20px;  /* Padding inside the form */
+    border-radius: 5px;  /* Rounded corners for the form */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow effect */
+}
+
+/* Form label and input styling */
+label, input {
+    display: block;  /* Display labels and inputs as block elements */
+    margin-bottom: 10px;  /* Add bottom margin for spacing */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;  /* Full width for input fields */
+    padding: 10px;  /* Padding inside input fields */
+    border: 1px solid #ccc;  /* Light gray border */
+    border-radius: 3px;  /* Rounded corners for input fields */
+}
+
+/* Button styling */
+button {
+    display: block;  /* Display button as a block element */
+    width: 100%;  /* Full width for the button */
+    padding: 10px;  /* Padding inside the button */
+    background-color: #005d96;  /* Dark blue background color */
+    color: #fff;  /* White text color */
+    border: none;  /* Remove border */
+    border-radius: 3px;  /* Rounded corners for the button */
+    cursor: pointer;  /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease;  /* Smooth transition for background color */
+}
+
+button:hover {
+    background-color: #5aa0c2;  /* Lighter blue on hover */
+}
+
+/* Link styling */
+a {
+    color: #222;  /* Dark text color for links */
+    text-decoration: none;  /* Remove underline from links */
+}
+
+a:hover {
+    text-decoration: underline;  /* Underline links on hover */
+}
+
+/* Centering the form and links */
+.text-center {
+    text-align: center;  /* Center text */
+}
+
+/* Error message styling */
+.alert {
+    color: red;  /* Red text color for error messages */
+    margin-top: 10px;  /* Top margin for spacing */
+}
+
+/* User dashboard styling */
+.card {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow effect for cards */
+    border-radius: 5px;  /* Rounded corners for cards */
+}
+
+.card-header {
+    background-color: #005d96;  /* Dark blue background for card header */
+    color: #fff;  /* White text color */
+    font-weight: bold;  /* Bold text for header */
+    padding: 10px;  /* Padding inside the header */
+    border-radius: 5px 5px 0 0;  /* Rounded corners for the top of the header */
+}
+
+.card-body {
+    padding: 20px;  /* Padding inside the card body */
+}
+
+.card-body ul {
+    list-style-type: none;  /* Remove bullet points from list */
+    padding: 0;  /* Remove padding from list */
+}
+
+.card-body ul li {
+    margin-bottom: 10px;  /* Add bottom margin for list items */
+}
+
+.card-body ul li a {
+    color: #005d96;  /* Dark blue text color for links in the list */
+    text-decoration: none;  /* Remove underline from links */
+}
+
+.card-body ul li a:hover {
+    text-decoration: underline;  /* Underline links on hover */
+}
+
+.hero-section {
+    position: relative;  /* Position relative for child elements */
+    background-image: url('../images/food_platter.jpg'); /* Set background image */
+    background-size: cover;  /* Cover the entire section with the image */
+    background-position: center;  /* Center the background image */
+    height: 100vh;  /* Full viewport height */
+    display: flex;  /* Use flexbox layout */
+    justify-content: center;  /* Center content horizontally */
+    align-items: center;  /* Center content vertically */
+    color: white;  /* White text color */
+    text-align: center;  /* Center text */
+}
+
+.hero-section .hero-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Adds a dark overlay for better text visibility */
+    padding: 20px;  /* Padding inside the hero content */
+    border-radius: 10px;  /* Rounded corners for the hero content */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;  /* Smaller font size for headings on mobile */
+    }
+
+    .hero-content p {
+        font-size: 1rem;  /* Smaller font size for paragraphs on mobile */
+        margin-bottom: 1rem;  /* Bottom margin for spacing */
+    }
+
+    .services-section .col-md-4 {
+        flex: 0 0 100%; /* Full width for each card on mobile */
+        max-width: 100%;  /* Maximum width for each card */
+    }
+
+    .navbar {
+        flex-wrap: wrap;  /* Allow navbar items to wrap on smaller screens */
+    }
+
+    .navbar-nav {
+        justify-content: flex-start; /* Align navigation items to the left */
+    }
+
+    .navbar-toggler {
+        display: block; /* Ensure the toggler is visible on mobile */
+    }
+}

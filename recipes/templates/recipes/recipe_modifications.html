@@ -1,0 +1,104 @@
+{% extends "base.html" %}  <!-- Inherit from the base template 'base.html' -->
+
+{% load static %}  <!-- Load static files for use in the template -->
+
+{% block content %}  <!-- Start the content block for this template -->
+
+<style>
+/* Styles for the Recipe Modifications Page */  <!-- Start of custom styles for the recipe modifications page -->
+
+.preference-form {
+    padding: 20px;  <!-- Add padding inside the preference form -->
+    background-color: #f8f9fa;  <!-- Set background color for the form -->
+    border-radius: 8px;  <!-- Round the corners of the form -->
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  <!-- Add shadow effect to the form -->
+    margin: 20px auto;  <!-- Center the form with margin on top and bottom -->
+    max-width: 600px;  <!-- Set maximum width for the form -->
+}
+
+.preference-form h2 {
+    color: #0056b3;  <!-- Set the color of the heading to a shade of blue -->
+    text-align: center;  <!-- Center the heading text -->
+    margin-bottom: 20px;  <!-- Add space below the heading -->
+}
+
+.preference-form label {
+    font-size: 1.1rem;  <!-- Set font size for labels -->
+    font-weight: bold;  <!-- Make the label text bold -->
+    color: #333;  <!-- Set the text color for labels to dark gray -->
+    margin-top: 10px;  <!-- Add space above the labels -->
+}
+
+.preference-form input,
+.preference-form select,
+.preference-form textarea {
+    width: 100%;  <!-- Set width to 100% for input, select, and textarea elements -->
+    padding: 10px;  <!-- Add padding inside the input fields -->
+    margin: 10px 0;  <!-- Add vertical margin between fields -->
+    border-radius: 5px;  <!-- Round the corners of the input fields -->
+    border: 1px solid #ddd;  <!-- Set a light gray border for the input fields -->
+}
+
+.preference-form button {
+    width: 100%;  <!-- Set button width to 100% -->
+    padding: 10px;  <!-- Add padding inside the button -->
+    background-color: #0056b3;  <!-- Set background color of the button to blue -->
+    color: white;  <!-- Set text color of the button to white -->
+    border: none;  <!-- Remove border from the button -->
+    border-radius: 5px;  <!-- Round the corners of the button -->
+    font-size: 1.2rem;  <!-- Set font size for the button text -->
+    cursor: pointer;  <!-- Change cursor to pointer on hover -->
+    margin-top: 10px;  <!-- Add space above the button -->
+}
+
+.preference-form button:hover {
+    background-color: #003d82;  <!-- Change background color to a darker blue on button hover -->
+}
+</style>
+
+<div class="preference-form">  <!-- Start of the preference form container -->
+    <h2>Personalize Your Recipes</h2>  <!-- Heading for the form -->
+
+    <form method="post" action="{% url 'recipes:personalized_recommendations' %}">  <!-- Start of the form, POST method to submit data -->
+        {% csrf_token %}  <!-- Include CSRF token for security -->
+
+        <label for="diet">Dietary Preference:</label>  <!-- Label for dietary preference dropdown -->
+        <select id="diet" name="diet" required>  <!-- Dropdown for selecting dietary preference -->
+            <option value="">Select your diet</option>  <!-- Default option -->
+            <option value="vegetarian">Vegetarian</option>  <!-- Option for vegetarian diet -->
+            <option value="vegan">Vegan</option>  <!-- Option for vegan diet -->
+            <option value="keto">Keto</option>  <!-- Option for keto diet -->
+            <option value="paleo">Paleo</option>  <!-- Option for paleo diet -->
+            <option value="gluten-free">Gluten-Free</option>  <!-- Option for gluten-free diet -->
+            <option value="none">No Restrictions</option>  <!-- Option for no dietary restrictions -->
+        </select>
+
+        <label for="allergies">Allergies (if any):</label>  <!-- Label for allergies textarea -->
+        <textarea id="allergies" name="allergies" rows="2" placeholder="e.g. fish, peanuts, shellfish, dairy"></textarea>  <!-- Textarea for entering allergies -->
+
+        <label for="cuisine">Preferred Cuisine:</label>  <!-- Label for preferred cuisine dropdown -->
+        <select id="cuisine" name="cuisine" required>  <!-- Dropdown for selecting preferred cuisine -->
+            <option value="">Select your favorite cuisine</option>  <!-- Default option -->
+            <option value="italian">Italian</option>  <!-- Option for Italian cuisine -->
+            <option value="mexican">Mexican</option>  <!-- Option for Mexican cuisine -->
+            <option value="indian">Indian</option>  <!-- Option for Indian cuisine -->
+            <option value="chinese">Chinese</option>  <!-- Option for Chinese cuisine -->
+            <option value="japanese">Japanese</option>  <!-- Option for Japanese cuisine -->
+            <option value="mediterranean">Mediterranean</option>  <!-- Option for Mediterranean cuisine -->
+        </select>
+
+        <label for="spice_level">Spice Level:</label>  <!-- Label for spice level dropdown -->
+        <select id="spice_level" name="spice_level">  <!-- Dropdown for selecting spice level -->
+            <option value="mild">Mild</option>  <!-- Option for mild spice level -->
+            <option value="medium">Medium</option>  <!-- Option for medium spice level -->
+            <option value="spicy">Spicy</option>  <!-- Option for spicy level -->
+        </select>
+
+        <label for="ingredients">Ingredients to Include:</label>  <!-- Label for ingredients textarea -->
+        <textarea id="ingredients" name="ingredients" rows="3" placeholder="e.g., include: chicken, broccoli; "></textarea>  <!-- Textarea for entering ingredients to include -->
+
+        <button type="submit">Get Personalized Recipes</button>  <!-- Submit button to get personalized recipes -->
+    </form>
+</div>  <!-- End of the preference form container -->
+
+{% endblock %}  <!-- End of the content block -->

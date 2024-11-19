@@ -1,0 +1,198 @@
+<!DOCTYPE html>  <!-- Declare the document type as HTML5 -->
+<html lang="en">  <!-- Set the language of the document to English -->
+
+<head>
+    <meta charset="UTF-8">  <!-- Set the character encoding for the document to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Set viewport for responsive design -->
+    <title>Food Bites</title>  <!-- Set the title of the webpage -->
+    {% load static %}  <!-- Load static files for use in the template -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">  <!-- Link to Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="{% static 'static/recipes/css/style.css' %}">  <!-- Link to custom stylesheet for the recipes app -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />  <!-- Link to Swiper CSS for sliders -->
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>  <!-- Link to Swiper JS for slider functionality -->
+</head>
+
+<style>
+    /* General body styling */
+    body {
+        font-family: Arial, sans-serif;  <!-- Set the font family for the body -->
+    }
+
+    .container {
+        max-width: 1305px;  <!-- Set maximum width for the container -->
+    }
+
+    .navbar {
+    background-color: #f8f9fa; /* Light background color */
+    padding: 15px 20px; /* Add padding for spacing */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #007bff; /* Brand color */
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none; /* Remove underline */
+}
+
+.navbar-brand img {
+    height: 40px; /* Ensure logo height is consistent */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add spacing between logo and text */
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center; /* Align links vertically */
+    margin-left: auto; /* Push links to the right */
+    gap: 15px; /* Add spacing between items */
+}
+
+.navbar-nav .nav-item {
+    list-style: none;
+}
+
+.navbar-nav .nav-link {
+    color: #000; /* Text color */
+    font-weight: 500;
+    font-size: 1rem; /* Font size for links */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #0056b3; /* Change color on hover */
+}
+
+.navbar-toggler {
+    border: none; /* Remove border around toggler */
+    outline: none; /* Remove focus outline */
+}
+
+.navbar-toggler-icon {
+    color: #000; /* Black color for toggler icon */
+}
+
+.btn-login {
+    color: #fff; /* White text */
+    background-color: #007bff; /* Primary blue */
+    border-radius: 20px; /* Rounded corners */
+    padding: 5px 15px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column; /* Stack links vertically */
+        margin-left: 0; /* Center links on small screens */
+        gap: 10px;
+    }
+
+    .btn-login {
+        width: 100%; /* Full width button on mobile */
+        text-align: center;
+    }
+}
+
+
+    /* Profile page customizations */
+    .card {
+        border: none;  <!-- Remove border from card -->
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  <!-- Add shadow effect to card -->
+    }
+
+    .card-body h4 {
+        font-weight: bold;  <!-- Make the heading bold -->
+        color: #007bff;  <!-- Set heading color to primary blue -->
+    }
+
+    .form-control {
+        border-radius: 8px;  <!-- Round the corners of form controls -->
+    }
+
+    .btn-primary {
+        background-color: #007bff;  <!-- Set background color for primary button -->
+        border: none;  <!-- Remove border from primary button -->
+        transition: background-color 0.3s ease;  <!-- Add transition effect for background color -->
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;  <!-- Change background color to darker blue on hover -->
+    }
+</style>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'images/logo.png' %}" alt="Food Bites Logo">
+            Food Bites
+        </a>
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'recipes:index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#community-recipes">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#get-in-touch">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'recipes:blog_home' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-login" href="{% url 'recipes:login' %}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <div class="container">  <!-- Main content container -->
+        {% block content %}  <!-- Placeholder for content from child templates -->
+        {% endblock %}
+    </div>
+
+    <!-- base.html -->
+    {% if messages %}  <!-- Check if there are any messages to display -->
+        <div class="container mt-3">  <!-- Container for messages -->
+            {% for message in messages %}  <!-- Loop through each message -->
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">  <!-- Alert box for each message -->
+                    {{ message }}  <!-- Display the message content -->
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">  <!-- Button to close the alert -->
+                        <span aria-hidden="true">&times;</span>  <!-- Close icon -->
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  <!-- Include jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>  <!-- Include Popper.js for tooltips and popovers -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  <!-- Include Bootstrap JS -->
+    <script src="{% static 'recipes/js/script.js' %}"></script>  <!-- Link to custom JavaScript file -->
+</body>
+
+</html>

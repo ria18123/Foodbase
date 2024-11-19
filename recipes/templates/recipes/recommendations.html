@@ -1,0 +1,66 @@
+{% extends "base.html" %}  <!-- Inherit from the base template 'base.html' -->
+
+{% load static %} <!-- Add this line to load the static template tag -->
+
+{% block content %}  <!-- Start the content block for this template -->
+
+<div class="container mt-5">  <!-- Create a container with a top margin for spacing -->
+
+    <h2 class="text-center">Personalized Recipe Recommendations</h2>  <!-- Heading for the recipe recommendations section, centered -->
+
+    <div class="row">  <!-- Start a new row for layout -->
+
+        {% for recipe in recipes %}  <!-- Loop through each recipe in the recipes list -->
+
+        <div class="col-md-4 mb-4">  <!-- Create a column for each recipe, with bottom margin -->
+
+            <div class="card">  <!-- Start a card for displaying recipe details -->
+
+                {% if recipe.image %}  <!-- Check if the recipe has an image -->
+                    <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">  <!-- Display the recipe image -->
+                {% else %}  <!-- If no image is available -->
+                    <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="{{ recipe.title }}">  <!-- Display a placeholder image -->
+                {% endif %}  <!-- End of the image check -->
+
+                <div class="card-body">  <!-- Start the card body for content -->
+
+                    <h5 class="card-title">{{ recipe.title }}</h5>  <!-- Display the recipe title -->
+                    <p class="card-text">{{ recipe.description|truncatewords:20 }}</p>  <!-- Display a truncated description of the recipe (20 words) -->
+                    <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="btn btn-primary">View Recipe</a>  <!-- Button to view the full recipe details -->
+                </div>  <!-- End of the card body -->
+
+            </div>  <!-- End of the card -->
+
+        </div>  <!-- End of the recipe column -->
+
+        {% endfor %}  <!-- End of the recipe loop -->
+
+        {% if recipes|length == 0 %}  <!-- Check if there are no recipes found -->
+            <p class="text-center">No recipes found matching your preferences. Try adjusting your filters.</p>  <!-- Message indicating no recipes were found -->
+        {% endif %}  <!-- End of the no recipes check -->
+
+    </div>  <!-- End of the row -->
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between align-items-center mt-4">  <!-- Create a flex container for pagination controls -->
+
+        <div>
+            <span>Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}</span>  <!-- Display current page number and total number of pages -->
+        </div>
+
+        <div>
+            {% if recipes.has_previous %}  <!-- Check if there is a previous page -->
+                <a href="?page={{ recipes.previous_page_number }}" class="btn btn-outline-primary">Previous</a>  <!-- Button to go to the previous page -->
+            {% endif %}  <!-- End of previous page check -->
+
+            {% if recipes.has_next %}  <!-- Check if there is a next page -->
+                <a href="?page={{ recipes.next_page_number }}" class="btn btn-outline-primary">Next</a>  <!-- Button to go to the next page -->
+            {% endif %}  <!-- End of next page check -->
+
+        </div>
+
+    </div>  <!-- End of pagination controls -->
+
+</div>  <!-- End of the container -->
+
+{% endblock %}  <!-- End of the content block -->

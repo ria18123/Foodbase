@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Styling for the Header */
+    .header {
+        background-color: #1a1a1a;
+        color: white;
+        padding: 50px 0;
+        text-align: center;
+    }
+    .header h1 {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    .header p {
+        font-size: 1.2rem;
+        margin: 0;
+        color: #bbb;
+    }
+
+    /* Styling for the Blog Page */
+    .blog-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 15px;
+    }
+    .create-blog-btn {
+        display: inline-block;
+        margin: 20px auto;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 10px 30px;
+        font-size: 1rem;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    .create-blog-btn:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    .blog-card {
+        background-color: white;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        max-width: 360px;
+        transition: transform 0.3s;
+    }
+    .blog-card:hover {
+        transform: scale(1.05);
+    }
+    .blog-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .blog-card-body {
+        padding: 20px;
+        text-align: left;
+    }
+    .blog-card-body h5 {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .blog-card-body p {
+        color: #666;
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    .blog-card-body .read-more {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+    .read-more:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }
+
+</style>
+
+<div class="header">
+    <h1>Tasty Insights</h1>
+    <p>Discover delicious recipes and tips!</p>
+</div>
+
+<div class="blog-container text-center">
+    <!-- Create Blog Button -->
+    <a href="/create-blog" class="create-blog-btn">Create Blog</a>
+
+    <div class="row">
+        <!-- Dynamically Render Blogs -->
+        {% for blog in blogs %}
+        <div class="blog-card">
+            {% if blog.image %}
+            <img src="{{ blog.image.url }}" alt="Blog Image">
+            {% else %}
+            <img src="{% static 'images/default_blog.jpg' %}" alt="Default Blog Image">
+            {% endif %}
+            <div class="blog-card-body">
+                <h5>{{ blog.title }}</h5>
+                <p>{{ blog.content|truncatewords:20 }}</p>
+                <a href="/blog/{{ blog.id }}" class="read-more">Read more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Show message if no blogs exist -->
+    {% if blogs|length == 0 %}
+    <p>No blogs available. Be the first to create a blog!</p>
+    {% endif %}
+</div>
+{% endblock %}

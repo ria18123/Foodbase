@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Get in Touch</h2>
+    {% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+<form method="POST" action="{% url 'get_in_touch' %}">
+    {% csrf_token %}
+    <label for="name">Name *</label>
+    <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+    <label for="email">Email address *</label>
+    <input type="email" id="email" name="email" placeholder="email@website.com" required>
+    <label for="phone">Phone number *</label>
+    <input type="tel" id="phone" name="phone" placeholder="555-555-5555" required>
+    <label for="message">Message</label>
+    <textarea id="message" name="message" placeholder="Your message here..."></textarea>
+    <label>
+        <input type="checkbox" name="consent" required>
+        I allow this website to store my submission so they can respond to my inquiry. *
+    </label>
+    <button type="submit" class="btn">SUBMIT</button>
+</form>
+
+</div>
+{% endblock %}

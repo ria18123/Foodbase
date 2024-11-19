@@ -1,0 +1,6 @@
+Django~=5.0.7
+channels~=4.1.0
+pip~=24.1
+wheel~=0.43.0
+setuptools~=58.1.0
+wagtail>=6.1,<6.2

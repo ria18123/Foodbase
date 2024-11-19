@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body, html {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .submit-recipe-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+        background-color: #bad3a5;
+        padding-top: 60px;
+    }
+
+    .submit-recipe-form {
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .submit-recipe-form h2 {
+        font-size: 2.5rem;
+        margin-bottom: 25px;
+        color: #333;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 1.2rem;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .textarea-control {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .form-group .help-text {
+        font-size: 0.85rem;
+        color: #777;
+        margin-top: 4px;
+    }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="submit-recipe-container">
+    <div class="submit-recipe-form">
+        <h2>Submit a Recipe</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="help-text">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn-primary">Submit Recipe</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

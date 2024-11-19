@@ -1,0 +1,164 @@
+<!DOCTYPE html>  <!-- Declare the document type as HTML5 -->
+<html lang="en">  <!-- Set the language of the document to English -->
+
+<head>
+    <meta charset="UTF-8">  <!-- Set the character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Set viewport for responsive design -->
+    <title>Food Bites</title>  <!-- Set the title of the webpage -->
+    {% load static %}  <!-- Load static files for use in the template -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">  <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'static/recipes/css/style.css' %}">  <!-- Link to custom stylesheet -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />  <!-- Link to Swiper CSS for sliders -->
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>  <!-- Link to Swiper JS for sliders -->
+</head>
+
+<style>
+    /* General body styling */
+    body {
+        font-family: Arial, sans-serif;  <!-- Set the font family for the body -->
+    }
+
+    .container {
+        max-width: 1305px;  <!-- Set maximum width for the container -->
+    }
+
+    /* Navbar Styling */
+    .navbar {
+        background-color: #f8f9fa; /* Light background color for the navbar */
+        padding: 15px;  <!-- Add padding to the navbar -->
+    }
+
+    .navbar-brand {
+        display: flex;  <!-- Use flexbox for alignment -->
+        align-items: center;  <!-- Center items vertically -->
+        color: white;  <!-- Set text color to white -->
+        font-weight: bold;  <!-- Make the font bold -->
+        font-size: 1.5rem;  <!-- Set font size -->
+    }
+
+    .navbar-brand img {
+        height: 40px; /* Set height for the logo image */
+        width: auto; /* Maintain aspect ratio of the logo */
+        margin-right: 10px; /* Add space between logo and brand name */
+    }
+
+    .navbar-nav .nav-link {
+        color: #000 !important; /* Set link color to black */
+        font-weight: 500;  <!-- Set font weight for links -->
+        margin: 0 15px; /* Add spacing between navigation items */
+        transition: color 0.3s ease;  <!-- Add transition effect for color change -->
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #A9A9A9 !important; /* Change link color to light gray on hover */
+    }
+
+    .navbar-dark .navbar-brand {
+        color: #000;  <!-- Set brand color for dark navbar -->
+    }
+
+    .navbar-dark .navbar-brand:hover {
+        color: #000;  <!-- Maintain brand color on hover -->
+    }
+
+    .btn-login {
+        color: #496862;  <!-- Set text color for login button -->
+        background-color: #fff;  <!-- Set background color for login button -->
+        font-weight: bold;  <!-- Make the font bold -->
+        border-radius: 20px;  <!-- Round the corners of the button -->
+        padding: 5px 15px;  <!-- Add padding to the button -->
+        transition: background-color 0.3s ease;  <!-- Add transition effect for background color -->
+    }
+
+    .btn-login:hover {
+        background-color: #e0e0e0; /* Change background color to light gray on hover */
+    }
+
+    /* Profile page customizations */
+    .card {
+        border: none;  <!-- Remove border from card -->
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  <!-- Add shadow effect to card -->
+    }
+
+    .card-body h4 {
+        font-weight: bold;  <!-- Make the heading bold -->
+        color: #007bff;  <!-- Set heading color to primary blue -->
+    }
+
+    .form-control {
+        border-radius: 8px;  <!-- Round the corners of form controls -->
+    }
+
+    .btn-primary {
+        background-color: #007bff;  <!-- Set background color for primary button -->
+        border: none;  <!-- Remove border from primary button -->
+        transition: background-color 0.3s ease;  <!-- Add transition effect for background color -->
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;  <!-- Change background color to darker blue on hover -->
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">  <!-- Create a responsive dark navbar -->
+        <div class="container">  <!-- Container for navbar content -->
+            <a href="/" class="navbar-brand">  <!-- Brand link for the website -->
+                <img src="{% static 'images/logo.png' %}" alt="Food Bites Logo">  <!-- Logo image -->
+                <span>Food Bites</span>  <!-- Brand name -->
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">  <!-- Button for toggling navbar on small screens -->
+                <span class="navbar-toggler-icon"></span>  <!-- Icon for the toggler button -->
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">  <!-- Collapsible navbar content -->
+                <ul class="navbar-nav">  <!-- Navigation items -->
+                    <li class="nav-item">  <!-- Home link -->
+                        <a class="nav-link" href="{% url 'recipes:index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">  <!-- Services link -->
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">  <!-- Categories link -->
+                        <a class="nav-link" href="{% url 'recipes:category_list' %}">Categories</a>
+                    </li>
+                    <li class="nav-item">  <!-- About link -->
+                        <a class="nav-link" href="#community-recipes">About</a>
+                    </li>
+                    <li class="nav-item">  <!-- Contact link -->
+                        <a class="nav-link" href="#get-in-touch">Contact</a>
+                    </li>
+                    <li class="nav-item">  <!-- Login button -->
+                        <a class="btn btn-login" href="{% url 'recipes:login' %}">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">  <!-- Main content container -->
+        {% block content %}  <!-- Placeholder for content from child templates -->
+        {% endblock %}
+    </div>
+
+    <!-- base.html -->
+    {% if messages %}  <!-- Check if there are any messages to display -->
+        <div class="container mt-3">  <!-- Container for messages -->
+            {% for message in messages %}  <!-- Loop through each message -->
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">  <!-- Alert box for each message -->
+                    {{ message }}  <!-- Display the message content -->
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">  <!-- Button to close the alert -->
+                        <span aria-hidden="true">&times;</span>  <!-- Close icon -->
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  <!-- Include jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>  <!-- Include Popper.js for tooltips and popovers -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  <!-- Include Bootstrap JS -->
+    <script src="{% static 'recipes/js/script.js' %}"></script>  <!-- Link to custom JavaScript file -->
+</body>
+
+</html>

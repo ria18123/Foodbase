@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Bites</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'static/recipes/css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .dashboard {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .dashboard h2 {
+            margin-top: 0;
+        }
+        .logout-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #d9534f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+   <div class="header">
+        <h1>Welcome to Your Dashboard, {{ user.username }}!</h1>
+    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'index' %}">Food Bites</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'submit_recipe' %}">Submit Recipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'category_list' %}">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'chat_room' 'general' %}">Chat Room</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+
+                    </li>
+
+                </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard">
+            <h2>Dashboard</h2>
+            <p>This is your user dashboard. Here you can manage your account, view your submitted recipes, and more.</p>
+        </div>
+   </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'recipes/js/script.js' %}"></script>
+</body>
+</html>

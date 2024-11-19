@@ -1,0 +1,137 @@
+{% extends "head.html" %}  <!-- Inherit from the base template 'head.html' -->
+
+{% load static %}  <!-- Load static files for use in the template -->
+
+{% block content %}  <!-- Start the content block for this template -->
+
+<style>
+/* style.css */  <!-- Start of custom styles for this template -->
+
+.service-detail {
+    display: flex;  <!-- Use flexbox for layout -->
+    align-items: center;  <!-- Center items vertically within the flex container -->
+    justify-content: center;  <!-- Center items horizontally within the flex container -->
+    padding: 40px;  <!-- Add padding around the service detail section -->
+}
+
+.service-detail img {
+    max-width: 50%;  <!-- Set maximum width of the image to 50% of its container -->
+    height: auto;  <!-- Maintain the aspect ratio of the image -->
+    border-radius: 8px;  <!-- Round the corners of the image -->
+}
+
+.service-detail-content {
+    padding: 20px;  <!-- Add padding around the content section -->
+    max-width: 50%;  <!-- Set maximum width of the content to 50% of its container -->
+}
+
+.service-detail-content h1 {
+    color: #0056b3;  <!-- Set the color of the heading to a shade of blue -->
+    font-size: 2.5rem;  <!-- Set the font size of the heading -->
+    margin-bottom: 20px;  <!-- Add space below the heading -->
+}
+
+.service-detail-content p {
+    font-size: 1.2rem;  <!-- Set the font size for paragraphs -->
+    color: #333;  <!-- Set the text color to a dark gray -->
+    margin-bottom: 20px;  <!-- Add space below paragraphs -->
+}
+
+.service-detail-content .btn {
+    font-size: 1.2rem;  <!-- Set the font size for buttons -->
+    padding: 10px 20px;  <!-- Add padding to the button -->
+    background-color: #0056b3;  <!-- Set the background color of the button to blue -->
+    color: white;  <!-- Set the text color of the button to white -->
+    border: none;  <!-- Remove border from the button -->
+    border-radius: 5px;  <!-- Round the corners of the button -->
+    text-decoration: none;  <!-- Remove underline from button text -->
+}
+
+.service-detail-content .btn:hover {
+    background-color: #003d82;  <!-- Change background color to a darker blue on hover -->
+}
+
+/* Community Recipes Section Styles */
+.community-recipes {
+    background-color: #f8f9fa;  <!-- Set background color for the community recipes section -->
+}
+
+.community-recipes .container {
+    display: flex;  <!-- Use flexbox for layout in the container -->
+    justify-content: space-between;  <!-- Space out items evenly within the container -->
+}
+</style>
+<!-- Start of the community recipes section -->
+<section class="community-recipes">
+    <!-- Start of the service detail section -->
+    <div class="service-detail">
+
+        {% if service_name == "recipe-collection" %}  <!-- Check if the service name is 'recipe-collection' -->
+        <!-- Display image for recipe collection -->
+            <img src="{% static 'images/log.jpg' %}" alt="Recipe collection">
+        <!-- Start of content for recipe collection -->
+            <div class="service-detail-content">
+                <!-- Heading for recipe collection -->
+                <h1>Recipe collection</h1>
+                <p>Discover a vast array of recipes from various cultures and cuisines, handpicked to tantalize your taste buds. From comforting classics to exotic dishes, our recipe collection ensures you never run out of culinary inspiration.</p>  <!-- Description for recipe collection -->
+               <!-- Button to schedule an appointment -->
+                <a href="#" class="btn">Schedule appointment</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+        {% elif service_name == "user-interaction" %}  <!-- Check if the service name is 'user-interaction' -->
+            <img src="{% static 'images/bak1.jpg' %}" class="card-img-top" alt="User interaction">  <!-- Display image for user interaction -->
+           <!-- Start of content for user interaction -->
+            <div class="service-detail-content">
+                <!-- Heading for user interaction -->
+                <h1>User interaction</h1>
+                <p>Connect with fellow foodies, share cooking tips, and swap recipe ideas on our platform. Experience the joy of interacting with like-minded individuals passionate about gastronomy and culinary adventures.</p>  <!-- Description for user interaction -->
+                <!-- Button to schedule an appointment -->
+                <a href="#" class="btn">Schedule appointment</a>
+            </div>
+
+        {% elif service_name == "flavor-profiles" %}  <!-- Check if the service name is 'flavor-profiles' -->
+<!-- Display image for flavor profiles -->
+            <img src="{% static 'images/ink.jpg' %}" alt="Flavor Profiles">
+ <!-- Start of content for flavor profiles -->
+            <div class="service-detail-content">
+                <!-- Heading for flavor profiles -->
+                <h1>Flavor profiles</h1>
+                <p>Delve into the world of flavors with detailed descriptions of taste profiles in each recipe. Enhance your palate with a rich tapestry of tastes and aromas, making meal planning and grocery shopping a delightful experience.</p>  <!-- Description for flavor profiles -->
+                <!-- Button to schedule an appointment -->
+                <a href="#" class="btn">Schedule appointment</a>
+            </div>
+
+        {% elif service_name == "recipe-modifications" %}  <!-- Check if the service name is 'recipe-modifications' -->
+ <!-- Display image for recipe modifications -->
+            <img src="{% static 'images/img.png' %}" alt="Recipe Modifications">
+<!-- Start of content for recipe modifications -->
+            <div class="service-detail-content">
+                <!-- Heading for recipe modifications -->
+                <h1>Recipe modifications</h1>
+                <p>Tailor recipes to your liking by making personalized modifications to ingredients and cooking methods. Create culinary masterpieces that reflect your unique flavor preferences and dietary requirements with ease.</p>  <!-- Description for recipe modifications -->
+                <a href="#" class="btn">Schedule appointment</a>  <!-- Button to schedule an appointment -->
+            </div>
+
+        {% elif service_name == "cooking-experiences" %}  <!-- Check if the service name is 'cooking-experiences' -->
+            <img src="{% static 'images/img_7.jpg' %}" alt="Cooking Experiences">  <!-- Display image for cooking experiences -->
+            <div class="service-detail-content">  <!-- Start of content for cooking experiences -->
+                <h1>Cooking experiences</h1>  <!-- Heading for cooking experiences -->
+                <p>Embark on a culinary journey by sharing your cooking triumphs and challenges with our community. Learn from others' experiences, gain new insights, and elevate your cooking skills while fostering a sense of camaraderie and mutual learning.</p>  <!-- Description for cooking experiences -->
+                <a href="#" class="btn">Schedule appointment</a>  <!-- Button to schedule an appointment -->
+            </div>
+
+        {% elif service_name == "meal-prep-assistance" %}  <!-- Check if the service name is 'meal-prep-assistance' -->
+            <img src="{% static 'images/prep.jpg' %}" alt="Meal Prep Assistance">  <!-- Display image for meal prep assistance -->
+            <div class="service-detail-content">  <!-- Start of content for meal prep assistance -->
+                <h1>Meal prep assistance</h1>  <!-- Heading for meal prep assistance -->
+                <p>Streamline your meal prep routine with expert advice on planning, organizing, and executing meals efficiently. Let us guide you through the process, offering time-saving techniques and innovative meal prep strategies for a hassle-free cooking experience.</p>  <!-- Description for meal prep assistance -->
+                <a href="#" class="btn">Schedule appointment</a>  <!-- Button to schedule an appointment -->
+            </div>
+
+        {% endif %}  <!-- End of the service name checks -->
+
+    </div>  <!-- End of the service detail section -->
+{% endblock %}  <!-- End of the content block -->

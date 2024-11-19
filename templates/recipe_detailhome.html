@@ -1,0 +1,63 @@
+{% extends "head.html" %}  <!-- Inherit from the base template 'head.html' -->
+
+{% load static %}  <!-- Load static files for use in the template -->
+
+{% block content %}  <!-- Start the content block for this template -->
+
+<div class="container mt-5">  <!-- Create a container with a top margin for spacing -->
+    <div class="row">  <!-- Start a new row for layout -->
+
+        <!-- Left column for the image -->
+        <div class="col-md-4 text-center">  <!-- Create a column for the image, centered -->
+            {% if recipe.image %}  <!-- Check if the recipe has an image -->
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="img-fluid rounded" style="object-fit: cover; max-height: 350px; width: 100%;">  <!-- Display the recipe image -->
+            {% else %}  <!-- If no image is available -->
+                <img src="{% static 'images/placeholder.jpg' %}" alt="No image available" class="img-fluid rounded" style="object-fit: cover; max-height: 350px; width: 100%;">  <!-- Display a placeholder image -->
+            {% endif %}  <!-- End of the image check -->
+        </div>
+
+        <!-- Right column for the content -->
+        <div class="col-md-8">  <!-- Create a column for the recipe content -->
+            <h1 class="mb-3">{{ recipe.title }}</h1>  <!-- Display the recipe title -->
+            <p class="lead">{{ recipe.description }}</p>  <!-- Display the recipe description -->
+            <hr>  <!-- Horizontal line for separation -->
+            <h4>Ingredients:</h4>  <!-- Heading for ingredients section -->
+            <p>{{ recipe.ingredients }}</p>  <!-- Display the list of ingredients -->
+            <h4>Instructions:</h4>  <!-- Heading for instructions section -->
+            <p>{{ recipe.instructions }}</p>  <!-- Display the cooking instructions -->
+            <h4>Details:</h4>  <!-- Heading for details section -->
+            <p><strong>Cook Time:</strong>  <!-- Label for cook time -->
+                {% if hours > 0 %}  <!-- Check if there are hours in cook time -->
+                    {{ hours }} hours  <!-- Display hours if available -->
+                {% endif %}  <!-- End of hours check -->
+                {% if minutes > 0 %}  <!-- Check if there are minutes in cook time -->
+                    {{ minutes }} minutes  <!-- Display minutes if available -->
+                {% endif %}  <!-- End of minutes check -->
+            </p>
+            <!-- Display the difficulty level of the recipe -->
+            <p><strong>Difficulty:</strong> {{ recipe.difficulty }}</p>
+            <!-- Display the calorie count -->
+            <p><strong>Calories:</strong> {{ recipe.calories }} kcal</p>
+            <!-- Display the protein content -->
+            <p><strong>Protein:</strong> {{ recipe.protein }}g</p>
+            <!-- Display the fat content -->
+            <p><strong>Fat:</strong> {{ recipe.fat }}g</p>
+            <!-- Display the sodium content -->
+            <p><strong>Sodium:</strong> {{ recipe.sodium }}mg</p>
+            <!-- Display the cuisine type -->
+            <p><strong>Cuisine:</strong> {{ recipe.cuisine }}</p>
+            <h4>Rating:</h4>  <!-- Heading for rating section -->
+            <p>
+                {% if recipe.ratings %}  <!-- Check if the recipe has ratings -->
+                    <strong>{{ recipe.ratings }}/5.0</strong>  <!-- Display the rating out of 5 -->
+                {% else %}  <!-- If no ratings are available -->
+                    <em>Not Rated</em>  <!-- Display a message indicating no rating -->
+                {% endif %}  <!-- End of ratings check -->
+            </p>
+            <a href="{% url 'recipes:index' %}" class="btn btn-secondary mt-3">Back to Recipes</a>  <!-- Button to navigate back to the recipes index -->
+        </div>
+
+    </div>  <!-- End of the row -->
+</div>  <!-- End of the container -->
+
+{% endblock %}  <!-- End of the content block -->

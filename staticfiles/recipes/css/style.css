@@ -1,0 +1,160 @@
+/* Ensure the navbar is displayed as a flex container */
+.navbar {
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    align-items: center;     /* Center the items vertically if needed */
+}
+
+/* Ensure the navbar items are displayed inline and centered */
+.navbar-nav {
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    flex-grow: 1;
+}
+
+/* Additional styling for nav items if necessary */
+.nav-item {
+    margin: 0 15px; /* Add some spacing between the nav items */
+}
+/* style.css */
+
+/* Reset default margin and padding */
+body, h1, h2, p, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color */
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+header {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header h1 {
+    font-weight: 600;
+    font-size: 40px;
+}
+
+/* Form container */
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Form label and input styling */
+label, input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Button styling */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #005d96;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #5aa0c2;
+}
+
+/* Link styling */
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Centering the form and links */
+.text-center {
+    text-align: center;
+}
+
+/* Error message styling */
+.alert {
+    color: red;
+    margin-top: 10px;
+}
+/* User dashboard styling */
+.card {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.card-header {
+    background-color: #005d96;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card-body ul li {
+    margin-bottom: 10px;
+}
+
+.card-body ul li a {
+    color: #005d96;
+    text-decoration: none;
+}
+
+.card-body ul li a:hover {
+    text-decoration: underline;
+}
+.hero-section {
+    position: relative;
+    background-image: url('../images/food_platter.jpg'); /* Adjust the path as necessary */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-section .hero-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Adds a dark overlay for better text visibility */
+    padding: 20px;
+    border-radius: 10px;
+}
